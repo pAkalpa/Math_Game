@@ -1,6 +1,7 @@
 package me.pasindu.mathgame
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -41,7 +42,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun openGameActivity() {
-//        TODO: Implement Open GameLogicActivity Intent
+        val gameActivity = Intent(this, GameLogicActivity::class.java)
+        startActivity(gameActivity)
     }
 
     private fun openAboutPopUpWindow(view: View) {
