@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MathGame">
         <activity
+            android:name=".AboutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GameLogicActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
