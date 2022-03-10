@@ -3,18 +3,15 @@ package me.pasindu.mathgame
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.transition.Slide
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.PopupWindow
-import android.widget.TextView
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
