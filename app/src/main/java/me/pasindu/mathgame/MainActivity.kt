@@ -1,21 +1,20 @@
 package me.pasindu.mathgame
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.ColorDrawable
+import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.system.Os.close
 import android.transition.Slide
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-import android.widget.ImageButton
-import android.widget.LinearLayout
 import android.widget.PopupWindow
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -37,7 +36,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View?) {
         when (view?.id) {
             btnNewGame!!.id -> openGameActivity()
-            btnAbout!!.id -> openAboutPopUpWindow(view)
+            btnAbout!!.id -> openAboutPopUpWindow()
         }
     }
 
@@ -46,13 +45,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         startActivity(gameActivity)
     }
 
-    private fun openAboutPopUpWindow(view: View) {
-        Log.d("Clicked","OpenAboutPopUpWindow Executed")
-        val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val viewPopUp = inflater.inflate(R.layout.layout_popup,null)
+    @SuppressLint("InflateParams")
+    private fun openAboutPopUpWindow() {
+        Log.d("Clicked", "OpenAboutPopUpWindow Executed")
+        val inflater: LayoutInflater =
+            getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val viewPopUp = inflater.inflate(R.layout.layout_popup, null)
         popupWindow = PopupWindow(
             viewPopUp,
-            1300,
+            1000,
             700,
             true
         )

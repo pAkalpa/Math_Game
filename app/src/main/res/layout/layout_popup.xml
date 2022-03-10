@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
     android:layout_width="300dp"
     android:layout_height="250dp"
-    android:background="#00BCD4">
+    android:background="#673AB7">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:text="@string/studentId" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:text="@string/studentName" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/courier_prime"
         android:layout_margin="10dp"
+        android:textColor="@color/white"
+        android:textStyle="italic"
+        android:fontFamily="@font/courier_prime"
         android:text="@string/message" />
 
 </LinearLayout>
