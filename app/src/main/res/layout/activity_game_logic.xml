@@ -22,19 +22,22 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="36dp"
             android:background="@null"
-            android:src="@drawable/ic_round_volume_up_24" />
+            android:contentDescription="@string/muteBtn"
+            android:src="@drawable/ic_round_volume_up_48"
+            android:tooltipText="@string/muteBtn"
+            tools:targetApi="o" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
-            <Chronometer
-                android:id="@+id/chronometerView"
+            <TextView
+                android:id="@+id/timerText"
+                android:text="@string/timerPlaceHolder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:countDown="true"
                 android:textAlignment="center"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 app:layout_constraintBottom_toBottomOf="@+id/barTimer"
                 app:layout_constraintEnd_toEndOf="@+id/barTimer"
                 app:layout_constraintStart_toStartOf="parent"
@@ -46,10 +49,11 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_centerInParent="true"
                 android:max="10"
+                android:progress="10"
                 android:progressDrawable="@drawable/circular_progress_bar"
                 tools:layout_editor_absoluteX="37dp" />
 
@@ -70,7 +74,8 @@
             android:textSize="20sp"
             android:autoSizeTextType="uniform"
             android:layout_marginEnd="20dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:targetApi="o" />
 
         <TextView
             android:id="@+id/tvEx2"
@@ -79,7 +84,8 @@
             android:textSize="20sp"
             android:autoSizeTextType="uniform"
             android:layout_marginStart="20dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:targetApi="o" />
     </LinearLayout>
 
     <LinearLayout
