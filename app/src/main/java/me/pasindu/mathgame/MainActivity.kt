@@ -18,8 +18,11 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
+//    New Game Button Declaration
     private var btnNewGame: Button? = null
+//    About Button Declaration
     private var btnAbout: Button? = null
+//    PopupWindow Declaration
     private var popupWindow: PopupWindow? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,10 +32,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btnNewGame = findViewById(R.id.newGame_btn)
         btnAbout = findViewById(R.id.aboutBtn)
 
+//        Set Click Listener for New Game Button
         btnNewGame!!.setOnClickListener(this)
+//        Set Click Listener for About Button
         btnAbout!!.setOnClickListener(this)
     }
 
+    /**
+     * override [onClick] Method
+     * @param view
+     */
     override fun onClick(view: View?) {
         when (view?.id) {
             btnNewGame!!.id -> openGameActivity()
@@ -40,33 +49,46 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    /**
+     * This [openGameActivity] Method Open New Activity [Intent]
+     */
     private fun openGameActivity() {
         val gameActivity = Intent(this, GameLogicActivity::class.java)
         startActivity(gameActivity)
     }
 
+    /**
+     * This [openAboutPopUpWindow] Method Open [PopupWindow]
+     */
     @SuppressLint("InflateParams")
     private fun openAboutPopUpWindow() {
-        Log.d("Clicked", "OpenAboutPopUpWindow Executed")
+//        Log.d("Clicked", "OpenAboutPopUpWindow Executed")
+//        Create LayoutInflater
         val inflater: LayoutInflater =
             getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+//        Inflate PopupWindow layout from layouts
         val viewPopUp = inflater.inflate(R.layout.layout_popup, null)
+//        Declare PopupWindow properties
         popupWindow = PopupWindow(
             viewPopUp,
             1000,
             700,
             true
         )
+//        Declare SlideIn Animation
         val slideIn = Slide()
         slideIn.slideEdge = Gravity.TOP
+//        Declare SlideOut Animation
         val slideOut = Slide()
         slideOut.slideEdge = Gravity.END
 
+//        Add Animations to PopupWindow
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             popupWindow!!.enterTransition = slideIn
             popupWindow!!.exitTransition = slideOut
         }
 
+//        Show PopupWindow
         popupWindow!!.showAtLocation(
             viewPopUp, // Location to display popup window
             Gravity.CENTER, // Exact position of layout to display popup
@@ -74,6 +96,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             0 // Y offset
         )
 
+//        Enable PopupWindow Close on Touch anywhere of the device screen
         popupWindow!!.isOutsideTouchable = true
     }
 }
