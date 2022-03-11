@@ -12,8 +12,6 @@ import android.widget.ProgressBar
 import android.os.Handler
 import android.widget.ImageButton
 import android.widget.TextView
-import java.util.*
-import kotlin.concurrent.schedule
 import kotlin.random.Random
 import kotlin.random.nextInt
 
@@ -200,7 +198,6 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
         }
         return Pair(expression.joinToString(separator = " "), expVal)
     }
-
 
     /**
      * This [getCorrectAnswer] Method Check for Correct Answer
