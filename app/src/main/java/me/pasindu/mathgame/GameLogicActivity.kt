@@ -1,5 +1,6 @@
 package me.pasindu.mathgame
 
+import android.content.Intent
 import android.graphics.Color
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
@@ -41,6 +42,7 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
     private var state = false
     private var gameTime = 50
     private var nextQuestion = false
+    private var totalTimeElapsed = gameTime
 
     private val updateTimerText = object : Runnable {
         override fun run() {
@@ -105,6 +107,7 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
             questionCount = savedInstanceState.getInt("qC", 0)
             correctCount = savedInstanceState.getInt("cC", 0)
             tempCorrectCount = savedInstanceState.getInt("tCC", 0)
+            totalTimeElapsed = savedInstanceState.getInt("tTE", 0)
             val stateOfBtn = savedInstanceState.getBoolean("state", false)
             state = stateOfBtn
             onMuteClick(!state)
@@ -120,6 +123,9 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
      * This Method [setExpression] Sets Random Math expressions to [TextView]'s
      */
     private fun setExpression() {
+        btnGreater!!.isEnabled = true
+        btnEquals!!.isEnabled = true
+        btnLess!!.isEnabled = true
         do {
             expOnePair = getRandomExpression()
         } while (expOnePair!!.second < 0 || expOnePair!!.second > 100)
@@ -206,6 +212,10 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
      */
     private fun getCorrectAnswer(operator: String) {
         questionCount++
+        btnGreater!!.isEnabled = false
+        btnEquals!!.isEnabled = false
+        btnLess!!.isEnabled = false
+
         if ((expOneVal > expTwoVal) && (operator == ">")) {
             result!!.text = getString(R.string.correct)
             result!!.setTextColor(Color.parseColor("#FF99CC00"))
@@ -224,7 +234,7 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
         } else {
             result!!.text = getString(R.string.wrong)
             result!!.setTextColor(Color.parseColor("#FFFF4444"))
-            tempCorrectCount = 0
+//            tempCorrectCount = 0 //uncomment this for enable consecutive counting
         }
         Log.d("EXP QCount", "$questionCount")
         Log.d("EXP CCount", "$correctCount")
@@ -283,6 +293,7 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
         outState.putDouble("EXP1S", expOnePair!!.second)
         outState.putDouble("EXP2S", expTwoPair!!.second)
         outState.putBoolean("state", state)
+        outState.putInt("tTE", totalTimeElapsed)
     }
 
     override fun onPause() {
@@ -299,10 +310,27 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun reduceOneSecond() {
         if (gameTime > 0) {
+            if (tempCorrectCount == 5) {
+                gameTime += 10
+                totalTimeElapsed += 10
+                tempCorrectCount = 0
+            }
             gameTime -= 1
             timerView!!.text = gameTime.toString()
             timerBar!!.progress = gameTime
             tickPlayer!!.start()
+        } else {
+            displayFinishActivity()
         }
+    }
+
+    private fun displayFinishActivity() {
+        val finishActivity = Intent(this, FinishActivity::class.java)
+        finishActivity.putExtra("qCount", questionCount)
+        finishActivity.putExtra("cCount", correctCount)
+        finishActivity.putExtra("tCCount", tempCorrectCount)
+        finishActivity.putExtra("tTElapsed", totalTimeElapsed)
+        startActivity(finishActivity)
+        finish()
     }
 }
