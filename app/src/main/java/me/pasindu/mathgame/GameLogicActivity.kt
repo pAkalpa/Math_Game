@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import kotlin.random.Random
+import kotlin.random.nextInt
 
 class GameLogicActivity : AppCompatActivity(), View.OnClickListener{
 
@@ -44,27 +46,33 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener{
      * This Method [setExpression] Sets Random Math expressions to [TextView]'s
      */
     private fun setExpression() {
-        val (exp1, val1) = getRandomExpression()
-        val (exp2, val2) = getRandomExpression()
-        expressionOne!!.text = exp1
-        expOneVal = val1
-        expressionTwo!!.text = exp2
-        expTwoVal = val2
-        Log.d("EXP1 $exp1", "$val1")
-        Log.d("EXP2 $exp2", "$val2")
+        var expOnePair: Pair<String, Double>
+        var expTwoPair: Pair<String, Double>
+        do {
+            expOnePair = getRandomExpression()
+        } while (expOnePair.second < 0 || expOnePair.second > 100)
+        do {
+            expTwoPair = getRandomExpression()
+        } while (expTwoPair.second < 0 || expTwoPair.second > 100)
+        expressionOne!!.text = expOnePair.first
+        expOneVal = expOnePair.second.toInt()
+        expressionTwo!!.text = expTwoPair.first
+        expTwoVal = expTwoPair.second.toInt()
+        Log.d("EXP1 ${expOnePair.first}", "$expOneVal")
+        Log.d("EXP2 ${expTwoPair.first}", "$expTwoVal")
         questionCount++
     }
 
     /**
      * This Method [getRandomExpression] Generate Random Math expressions with random terms
      *
-     * @return [Pair] of random math expression [String] and its value [Int]
+     * @return [Pair] of random math expression [String] and its value [Double]
      */
-    private fun getRandomExpression(): Pair<String, Int> {
+    private fun getRandomExpression(): Pair<String, Double> {
         val operators = listOf("/", "*", "+", "-")
         val firstTerm = (1..20).random()
-        var expVal = firstTerm
-        val noOfTerms = (2..4).random()
+        var expVal: Double = firstTerm.toDouble()
+        val noOfTerms = (2..3).random()
         val expression = mutableListOf<String>()
 
         if (noOfTerms >= 2) {
@@ -81,7 +89,20 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener{
             }
             val operator = operators.random()
             expression.add(operator)
-            val nextTerm = (1..20).random()
+            var nextTerm = (1..20).random()
+            if (operator == "/" && i == 1) {
+                nextTerm = (1..firstTerm).random()
+            } else if (operator == "/" && i >= 2 && expVal.toInt() > 0) {
+                nextTerm = (1..expVal.toInt()).random()
+            }
+            if (i > 2) {
+                nextTerm = if (expVal % 2 == 0.toDouble()) {
+                    Random.nextInt(1..20 / 2) * 2;
+                } else {
+                    Random.nextInt(1..20 / 2) * 2 + 1;
+                }
+            }
+
             expression.add(nextTerm.toString())
 
             when (operator) {
@@ -93,6 +114,7 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener{
         }
         return Pair(expression.joinToString(separator = " "), expVal)
     }
+
 
     /**
      * This [getCorrectAnswer] Method Check for Correct Answer
