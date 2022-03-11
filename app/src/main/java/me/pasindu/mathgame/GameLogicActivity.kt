@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.os.Looper
 import android.util.Log
 import android.view.View
@@ -13,6 +12,8 @@ import android.widget.ProgressBar
 import android.os.Handler
 import android.widget.ImageButton
 import android.widget.TextView
+import java.util.*
+import kotlin.concurrent.schedule
 import kotlin.random.Random
 import kotlin.random.nextInt
 
@@ -41,11 +42,23 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
     private var tempCorrectCount = 0
     private var state = false
     private var gameTime = 50
+    private var nextQuestion = false
 
     private val updateTimerText = object : Runnable {
         override fun run() {
             reduceOneSecond()
             handler!!.postDelayed(this, 1000)
+        }
+    }
+
+    private val setNextQuestion = object : Runnable {
+        override fun run() {
+            if (nextQuestion) {
+                setExpression()
+                nextQuestion = false
+                result!!.text = ""
+            }
+            handler!!.postDelayed(this, 2000)
         }
     }
 
@@ -220,15 +233,7 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
         Log.d("EXP CCount", "$correctCount")
         Log.d("EXP TCCount", "$tempCorrectCount")
 
-        object : CountDownTimer(1000, 500) {
-            override fun onTick(p0: Long) {
-//                Do Nothing
-            }
-
-            override fun onFinish() {
-                setExpression()
-            }
-        }
+        nextQuestion = true
     }
 
     private fun onMuteClick(btnState: Boolean) {
@@ -286,11 +291,13 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
     override fun onPause() {
         super.onPause()
         handler!!.removeCallbacks(updateTimerText)
+        handler!!.removeCallbacks(setNextQuestion)
     }
 
     override fun onResume() {
         super.onResume()
         handler!!.post(updateTimerText)
+        handler!!.post(setNextQuestion)
     }
 
     private fun reduceOneSecond() {
