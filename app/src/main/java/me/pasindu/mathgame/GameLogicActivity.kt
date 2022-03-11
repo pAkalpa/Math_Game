@@ -41,24 +41,12 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
     private var tempCorrectCount = 0
     private var state = false
     private var gameTime = 50
-    private var nextQuestion = false
     private var totalTimeElapsed = gameTime
 
     private val updateTimerText = object : Runnable {
         override fun run() {
             reduceOneSecond()
             handler!!.postDelayed(this, 1000)
-        }
-    }
-
-    private val setNextQuestion = object : Runnable {
-        override fun run() {
-            if (nextQuestion) {
-                setExpression()
-                nextQuestion = false
-                result!!.text = ""
-            }
-            handler!!.postDelayed(this, 2000)
         }
     }
 
@@ -101,15 +89,16 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
                     0.0
                 )
             )
+
             if (savedExpOnePair!!.first != "" && savedExpTwoPair!!.first != "") {
                 setExpressionToWidgets()
             }
+
             questionCount = savedInstanceState.getInt("qC", 0)
             correctCount = savedInstanceState.getInt("cC", 0)
             tempCorrectCount = savedInstanceState.getInt("tCC", 0)
             totalTimeElapsed = savedInstanceState.getInt("tTE", 0)
-            val stateOfBtn = savedInstanceState.getBoolean("state", false)
-            state = stateOfBtn
+            state = savedInstanceState.getBoolean("state", false)
             onMuteClick(!state)
         }
 
@@ -240,7 +229,11 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
         Log.d("EXP CCount", "$correctCount")
         Log.d("EXP TCCount", "$tempCorrectCount")
 
-        nextQuestion = true
+//        nextQuestion = true
+        Handler(Looper.getMainLooper()).postDelayed({
+            setExpression()
+            result!!.text = ""
+        }, 1000)
     }
 
     private fun onMuteClick(btnState: Boolean) {
@@ -299,13 +292,11 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
     override fun onPause() {
         super.onPause()
         handler!!.removeCallbacks(updateTimerText)
-        handler!!.removeCallbacks(setNextQuestion)
     }
 
     override fun onResume() {
         super.onResume()
         handler!!.post(updateTimerText)
-        handler!!.post(setNextQuestion)
     }
 
     private fun reduceOneSecond() {
