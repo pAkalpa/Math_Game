@@ -19,52 +19,73 @@ import kotlin.random.nextInt
 
 class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
 
-//    expression one text view declaration
+    //    expression one text view declaration
     private var expressionOne: TextView? = null
-//    expression two text view declaration
+
+    //    expression two text view declaration
     private var expressionTwo: TextView? = null
-//    result text view Declaration
+
+    //    result text view Declaration
     private var result: TextView? = null
-//    greater button declaration
+
+    //    greater button declaration
     private var btnGreater: Button? = null
-//    equal button declaration
+
+    //    equal button declaration
     private var btnEquals: Button? = null
-//    less button declaration
+
+    //    less button declaration
     private var btnLess: Button? = null
-//    timer TextView declaration
+
+    //    timer TextView declaration
     private var timerView: TextView? = null
-//    ProgressBar declaration
+
+    //    ProgressBar declaration
     private var timerBar: ProgressBar? = null
-//    mute button declaration
+
+    //    mute button declaration
     private var btnMute: ImageButton? = null
-//    MediaPlayer declaration
+
+    //    MediaPlayer declaration
     private var tickPlayer: MediaPlayer? = null
-//    handler declaration
+
+    //    handler declaration
     private var handler: Handler? = null
 
-//    null pair to retrieve saved data
+    //    null pair to retrieve saved data
     private var savedExpOnePair: Pair<String, Double>? = null
-//    null pair to retrieve saved data
+
+    //    null pair to retrieve saved data
     private var savedExpTwoPair: Pair<String, Double>? = null
-//    expression one pair
+
+    //    expression one pair
     private var expOnePair: Pair<String, Double>? = null
-//    expression two pair
+
+    //    expression two pair
     private var expTwoPair: Pair<String, Double>? = null
-//    expression one value
+
+    //    expression one value
     private var expOneVal = 0
-//    expression two value
+
+    //    expression two value
     private var expTwoVal = 0
-//    question count
+
+    //    question count
     private var questionCount = 0
-//    correct Answer count
+
+    //    correct Answer count
     private var correctCount = 0
-//    temporary correct count
+
+    //    temporary correct count
     private var tempCorrectCount = 0
-//    save mute btn state
+
+    //    save mute btn state
     private var state = false
-//    full game time in seconds
+
+    //    full game time in seconds
     private var gameTime = 50
-//    save total elapsed time in seconds`
+
+    //    save total elapsed time in seconds`
     private var totalTimeElapsed = gameTime
 
     /**
@@ -252,7 +273,7 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
                 var temp: Double
                 do {
                     nextTerm = (1..20).random()
-                    temp = expVal*nextTerm
+                    temp = expVal * nextTerm
                 } while (temp >= 100) // generate random number until value is less than 100
             }
 

@@ -3,7 +3,6 @@ package me.pasindu.mathgame
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,11 +15,13 @@ import android.widget.PopupWindow
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-//    New Game Button Declaration
+    //    New Game Button Declaration
     private var btnNewGame: Button? = null
-//    About Button Declaration
+
+    //    About Button Declaration
     private var btnAbout: Button? = null
-//    PopupWindow Declaration
+
+    //    PopupWindow Declaration
     private var popupWindow: PopupWindow? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
