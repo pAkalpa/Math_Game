@@ -16,4 +16,10 @@
     <string name="wrong">WRONG</string>
     <string name="timerPlaceHolder">00</string>
     <string name="muteBtn">Mute Button</string>
+    <string name="question_count">Question Count🧮 :</string>
+    <string name="game_over">Game Over!☠️</string>
+    <string name="total_time_elapsed">Total Time Elapsed⏲️ :</string>
+    <string name="correct_answer_count">Correct Answer Count✅ :</string>
+    <string name="incorrect_answer_count">Incorrect Answer Count❎ :</string>
+    <string name="timeAnswer">%1$d Seconds</string>
 </resources>
