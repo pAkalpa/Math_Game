@@ -3,6 +3,7 @@ package me.pasindu.mathgame
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -90,7 +91,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             viewPopUp, // Location to display popup window
             Gravity.CENTER, // Exact position of layout to display popup
             0, // X offset
-            15 // Y offset
+            80 // Y offset
         )
 
 //        Enable PopupWindow Close on Touch anywhere of the device screen
