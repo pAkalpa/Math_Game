@@ -13,6 +13,7 @@ import android.widget.ProgressBar
 import android.os.Handler
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import kotlin.random.Random
 import kotlin.random.nextInt
 
@@ -181,6 +182,13 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
                     Random.nextInt(1..20 / 2) * 2 + 1
                 }
             }
+            if (operator == "*") {
+                var temp: Double
+                do {
+                    nextTerm = (1..20).random()
+                    temp = expVal*nextTerm
+                } while (temp >= 100)
+            }
 
             expression.add(nextTerm.toString())
 
@@ -206,23 +214,15 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
         btnLess!!.isEnabled = false
 
         if ((expOneVal > expTwoVal) && (operator == ">")) {
-            result!!.text = getString(R.string.correct)
-            result!!.setTextColor(Color.parseColor("#FF99CC00"))
-            correctCount++
-            tempCorrectCount++
+            setResultText()
         } else if ((expOneVal == expTwoVal) && (operator == "=")) {
-            result!!.text = getString(R.string.correct)
-            result!!.setTextColor(Color.parseColor("#FF99CC00"))
-            correctCount++
-            tempCorrectCount++
+            setResultText()
         } else if ((expOneVal < expTwoVal) && (operator == "<")) {
-            result!!.text = getString(R.string.correct)
-            result!!.setTextColor(Color.parseColor("#FF99CC00"))
-            correctCount++
-            tempCorrectCount++
+            setResultText()
         } else {
             result!!.text = getString(R.string.wrong)
             result!!.setTextColor(Color.parseColor("#FFFF4444"))
+            result!!.background = ContextCompat.getDrawable(this, R.drawable.result_bg)
 //            tempCorrectCount = 0 //uncomment this for enable consecutive counting
         }
         Log.d("EXP QCount", "$questionCount")
@@ -233,7 +233,16 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
         Handler(Looper.getMainLooper()).postDelayed({
             setExpression()
             result!!.text = ""
-        }, 1000)
+            result!!.background = null
+        }, 1500)
+    }
+
+    private fun setResultText() {
+        result!!.text = getString(R.string.correct)
+        result!!.setTextColor(Color.parseColor("#FF99CC00"))
+        result!!.background = ContextCompat.getDrawable(this, R.drawable.result_bg)
+        correctCount++
+        tempCorrectCount++
     }
 
     private fun onMuteClick(btnState: Boolean) {
