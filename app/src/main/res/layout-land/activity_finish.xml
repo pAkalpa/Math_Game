@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/finish_activity_p"
+    android:background="@drawable/finish_activity_l"
     tools:context=".FinishActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="350dp"
+        android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/game_over"
-            android:textSize="30sp"
+            android:textSize="50sp"
             android:fontFamily="@font/super_mario"
             android:textColor="@color/white"
             android:layout_marginBottom="20dp"
@@ -48,15 +48,17 @@
                 android:fontFamily="@font/retro_gaming"
                 android:text="@string/question_count"
                 android:textAlignment="viewEnd"
+                android:textSize="20sp"
                 android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/qCountV"
-                android:layout_width="130dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/retro_gaming"
                 android:text="@string/timerPlaceHolder"
                 android:textAlignment="viewStart"
+                android:textSize="20sp"
                 android:textColor="@color/white" />
 
         </LinearLayout>
@@ -75,15 +77,17 @@
                 android:fontFamily="@font/retro_gaming"
                 android:text="@string/total_time_elapsed"
                 android:textAlignment="viewEnd"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/ttElapsedV"
-                android:layout_width="130dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/retro_gaming"
                 android:text="@string/timerPlaceHolder"
                 android:textAlignment="viewStart"
+                android:textSize="20sp"
                 android:textColor="@color/white" />
 
         </LinearLayout>
@@ -102,15 +106,17 @@
                 android:fontFamily="@font/retro_gaming"
                 android:text="@string/correct_answer_count"
                 android:textAlignment="viewEnd"
+                android:textSize="20sp"
                 android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/caCountV"
-                android:layout_width="130dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/retro_gaming"
                 android:text="@string/timerPlaceHolder"
                 android:textAlignment="viewStart"
+                android:textSize="20sp"
                 android:textColor="@color/white" />
 
         </LinearLayout>
@@ -129,15 +135,17 @@
                 android:fontFamily="@font/retro_gaming"
                 android:text="@string/incorrect_answer_count"
                 android:textAlignment="viewEnd"
+                android:textSize="20sp"
                 android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/iaCountV"
-                android:layout_width="130dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/retro_gaming"
                 android:text="@string/timerPlaceHolder"
                 android:textAlignment="viewStart"
+                android:textSize="20sp"
                 android:textColor="@color/white" />
 
         </LinearLayout>
