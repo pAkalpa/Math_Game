@@ -451,7 +451,6 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
 //        send data to finishActivity intent
         finishActivity.putExtra("qCount", questionCount)
         finishActivity.putExtra("cCount", correctCount)
-        finishActivity.putExtra("tCCount", tempCorrectCount)
         finishActivity.putExtra("tTElapsed", totalTimeElapsed)
 //        start finishActivity Intent
         startActivity(finishActivity)
