@@ -13,12 +13,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:fontFamily="@font/candy_crush"
+        android:fontFamily="@font/candy_crush_font"
         android:text="@string/new_game"
         android:textAllCaps="false"
         android:textSize="40sp"
         android:textStyle="bold"
-        android:background="@drawable/pill_shape"/>
+        android:background="@drawable/pill_shape_btn"/>
 
     <Button
         android:id="@+id/aboutBtn"
@@ -26,9 +26,9 @@
         android:layout_height="wrap_content"
         android:text="@string/about"
         android:textSize="40sp"
-        android:fontFamily="@font/candy_crush"
+        android:fontFamily="@font/candy_crush_font"
         android:textAllCaps="false"
         android:textStyle="bold"
-        android:background="@drawable/pill_shape"/>
+        android:background="@drawable/pill_shape_btn"/>
 
 </LinearLayout>
