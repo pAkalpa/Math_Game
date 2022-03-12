@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             viewPopUp, // Location to display popup window
             Gravity.CENTER, // Exact position of layout to display popup
             0, // X offset
-            0 // Y offset
+            15 // Y offset
         )
 
 //        Enable PopupWindow Close on Touch anywhere of the device screen

@@ -3,8 +3,8 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_width="300dp"
-    android:layout_height="250dp"
-    android:background="#673AB7">
+    android:layout_height="280dp"
+    android:background="@drawable/popup_bg">
 
     <TextView
         android:layout_width="match_parent"
@@ -12,6 +12,7 @@
         android:layout_marginTop="20dp"
         android:textAlignment="center"
         android:textColor="@color/white"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:text="@string/studentId" />
 
@@ -19,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:textSize="18sp"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:text="@string/studentName" />
@@ -27,9 +29,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:textColor="@color/white"
-        android:textStyle="italic"
         android:fontFamily="@font/courier_prime"
-        android:text="@string/message" />
+        android:text="@string/message"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="italic" />
 
 </LinearLayout>

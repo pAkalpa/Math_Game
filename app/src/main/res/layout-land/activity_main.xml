@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_height="match_parent"
-    android:background="@drawable/main_activity_p"
+    android:background="@drawable/main_activity_l"
     tools:context=".MainActivity">
 
     <Button
@@ -13,22 +13,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
+        android:textSize="50sp"
         android:fontFamily="@font/candy_crush"
         android:text="@string/new_game"
         android:textAllCaps="false"
-        android:textSize="40sp"
-        android:textStyle="bold"
         android:background="@drawable/pill_shape"/>
 
     <Button
         android:id="@+id/aboutBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="50sp"
         android:text="@string/about"
-        android:textSize="40sp"
-        android:fontFamily="@font/candy_crush"
         android:textAllCaps="false"
-        android:textStyle="bold"
+        android:fontFamily="@font/candy_crush"
         android:background="@drawable/pill_shape"/>
 
 </LinearLayout>
