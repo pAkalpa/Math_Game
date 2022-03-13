@@ -236,7 +236,7 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
 //        assign first number to value
         var expVal: Double = firstTerm.toDouble()
 //        generate and assign no of terms to variable
-        val noOfTerms = (2..3).random()
+        val noOfTerms = (1..3).random()
 //        create empty string list to store expression
         val expression = mutableListOf<String>()
 
