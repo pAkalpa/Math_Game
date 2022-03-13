@@ -152,7 +152,7 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
 
 //            set expressions to text views if expression one and two expressions not empty
             if (savedExpOnePair!!.first != "" && savedExpTwoPair!!.first != "") {
-                setExpressionToWidgets()
+                setExpressionToWidgets(false)
             }
 
 //            load question count
@@ -173,14 +173,14 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
         handler = Handler(Looper.getMainLooper())
 
 //        invoke setExpression function
-        setExpression()
+        setExpression(false)
 
     }
 
     /**
      * This Method [setExpression] Generate Random Math expressions
      */
-    private fun setExpression() {
+    private fun setExpression(value: Boolean) {
 //        enable all disabled buttons
         btnGreater!!.isEnabled = true
         btnEquals!!.isEnabled = true
@@ -193,7 +193,7 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
             expTwoPair = getRandomExpression()
         } while (expTwoPair!!.second < 0 || expTwoPair!!.second > 100)
 //        invoke setExpressionToWidgets method
-        setExpressionToWidgets()
+        setExpressionToWidgets(value)
 //        Logging data for debugging purpose
         Log.d("EXP1 ${expOnePair!!.first}", "$expOneVal")
         Log.d("EXP2 ${expTwoPair!!.first}", "$expTwoVal")
@@ -202,12 +202,14 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
     /**
      * This Method [setExpressionToWidgets] set expressions to [TextView]'s'
      */
-    private fun setExpressionToWidgets() {
-        if (savedExpOnePair != null && savedExpTwoPair != null) { // check for null
-            if (savedExpOnePair!!.first != "" && savedExpTwoPair!!.first != "") { // check for empty expressions
-//                assign saved pairs to variables
-                expOnePair = savedExpOnePair
-                expTwoPair = savedExpTwoPair
+    private fun setExpressionToWidgets(value: Boolean) {
+        if (!value) {
+            if (savedExpOnePair != null && savedExpTwoPair != null) { // check for null
+                if (savedExpOnePair!!.first != "" && savedExpTwoPair!!.first != "") { // check for empty expressions
+    //                assign saved pairs to variables
+                    expOnePair = savedExpOnePair
+                    expTwoPair = savedExpTwoPair
+                }
             }
         }
 //        set expression one to textView
@@ -328,7 +330,7 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
 
 //        set delay before before next question
         Handler(Looper.getMainLooper()).postDelayed({
-            setExpression()
+            setExpression(true)
 //            clear result textView text
             result!!.text = ""
 //            clear result textView background
