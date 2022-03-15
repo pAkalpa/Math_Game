@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:gravity="end"
         android:layout_marginTop="5dp"
         android:orientation="horizontal" >
@@ -28,8 +28,9 @@
             tools:targetApi="o" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:id="@+id/c_layout"
+            android:layout_width="50dp"
+            android:layout_height="50dp" >
 
             <TextView
                 android:id="@+id/timerText"
@@ -40,22 +41,23 @@
                 android:textSize="25sp"
                 app:layout_constraintBottom_toBottomOf="@+id/barTimer"
                 app:layout_constraintEnd_toEndOf="@+id/barTimer"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/barTimer"
                 app:layout_constraintTop_toTopOf="@+id/barTimer"
                 app:layout_constraintVertical_bias="0.528" />
 
             <ProgressBar
                 android:id="@+id/barTimer"
                 style="?android:attr/progressBarStyleHorizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_centerInParent="true"
-                android:max="10"
-                android:progress="10"
+                android:max="50"
+                android:progress="50"
                 android:progressDrawable="@drawable/circular_progress_bar"
-                tools:layout_editor_absoluteX="37dp" />
+                app:layout_constraintBottom_toBottomOf="@id/c_layout"
+                app:layout_constraintEnd_toEndOf="@id/c_layout"
+                app:layout_constraintStart_toStartOf="@id/c_layout"
+                app:layout_constraintTop_toTopOf="@id/c_layout"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

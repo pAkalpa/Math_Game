@@ -2,6 +2,9 @@ package me.pasindu.mathgame
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.LinearLayout
 import android.widget.TextView
 
 class FinishActivity : AppCompatActivity() {
@@ -27,6 +30,12 @@ class FinishActivity : AppCompatActivity() {
     //    total elapsed time
     private var totalTimeElapsed: Int? = null
 
+    //    frame define variable
+    private var frame: LinearLayout? = null
+
+    //    vertical animation variable
+    private var verticalAnimation: Animation? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_finish)
@@ -39,6 +48,8 @@ class FinishActivity : AppCompatActivity() {
         ttElapsedV = findViewById(R.id.ttElapsedV)
         caCountV = findViewById(R.id.caCountV)
         iaCountV = findViewById(R.id.iaCountV)
+        frame = findViewById(R.id.linearLayout)
+        verticalAnimation = AnimationUtils.loadAnimation(this, R.anim.verticalmove)
 
 //        retrieve extras
         questionCount = intent.getIntExtra("qCount", 0)
@@ -54,6 +65,8 @@ class FinishActivity : AppCompatActivity() {
 //            load total time elapsed
             totalTimeElapsed = savedInstanceState.getInt("te", 0)
         }
+
+        frame!!.startAnimation(verticalAnimation)
 
 //        invoke setContent function
         setContent()

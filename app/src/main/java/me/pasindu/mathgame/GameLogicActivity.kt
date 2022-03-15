@@ -11,6 +11,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.os.Handler
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -88,6 +90,12 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
     //    save total elapsed time in seconds`
     private var totalTimeElapsed = gameTime
 
+    //    fadeout animation define
+    private var fadeout: Animation? = null
+
+    //    beat animation define
+    private var beat: Animation? = null
+
     /**
      * second, K., Karapanos, A., Truong, S., Sachwani, A. and Genedy, S., 2022. Kotlin: call a function every second.
      * (online) Stack Overflow.
@@ -115,6 +123,8 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
         btnMute = findViewById(R.id.btnMute)
         timerView = findViewById(R.id.timerText)
         timerBar = findViewById(R.id.barTimer)
+        fadeout = AnimationUtils.loadAnimation(this, R.anim.fadeout)
+        beat = AnimationUtils.loadAnimation(this, R.anim.beat)
 
 //        get tick audio resource id and assign it to variable
         val tickAssetId = resources.getIdentifier("tick", "raw", packageName)
@@ -206,7 +216,7 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
         if (!value) {
             if (savedExpOnePair != null && savedExpTwoPair != null) { // check for null
                 if (savedExpOnePair!!.first != "" && savedExpTwoPair!!.first != "") { // check for empty expressions
-    //                assign saved pairs to variables
+                    //                assign saved pairs to variables
                     expOnePair = savedExpOnePair
                     expTwoPair = savedExpTwoPair
                 }
@@ -328,13 +338,12 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
         Log.d("EXP CCount", "$correctCount")
         Log.d("EXP TCCount", "$tempCorrectCount")
 
+//        start fadeout animation
+        result!!.startAnimation(fadeout)
+
 //        set delay before before next question
         Handler(Looper.getMainLooper()).postDelayed({
             setExpression(true)
-//            clear result textView text
-            result!!.text = ""
-//            clear result textView background
-            result!!.background = null
         }, 1500)
     }
 
@@ -452,6 +461,12 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
                 totalTimeElapsed += 10
                 tempCorrectCount = 0
             }
+
+//            start beat animation in last 10 seconds
+            if (gameTime <= 10) {
+                timerView!!.startAnimation(beat)
+            }
+
 //            decrease one second from gameTime
             gameTime -= 1
 //            set time to timer textView
