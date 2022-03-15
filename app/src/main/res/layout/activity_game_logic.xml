@@ -80,9 +80,18 @@
             android:layout_height="wrap_content"
             android:background="@drawable/pill_shape_textview"
             android:textColor="@color/white"
-            android:layout_marginBottom="30dp"
             android:textStyle="bold"
             tools:targetApi="o" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="15dp"
+            android:text="@string/qText"
+            android:textSize="15sp"
+            android:fontFamily="@font/fredoka_regular"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tvEx2"

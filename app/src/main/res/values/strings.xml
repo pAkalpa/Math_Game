@@ -22,4 +22,5 @@
     <string name="correct_answer_count">Correct Answer Count✅ :</string>
     <string name="incorrect_answer_count">Incorrect Answer Count❎ :</string>
     <string name="timeAnswer">%1$d Sec.</string>
+    <string name="qText">Above expression is ...... than/to below expression</string>
 </resources>

@@ -195,6 +195,7 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
         btnGreater!!.isEnabled = true
         btnEquals!!.isEnabled = true
         btnLess!!.isEnabled = true
+
         do {
 //        invoke getRandomExpression method and assign returning pair to variable
             expOnePair = getRandomExpression()
