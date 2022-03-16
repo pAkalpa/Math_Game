@@ -111,6 +111,9 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_logic)
 
+//        hide action Bar
+        this.supportActionBar!!.hide()
+
 //        Assign id's to variables
         expressionOne = findViewById(R.id.tvEx1)
         expressionTwo = findViewById(R.id.tvEx2)
@@ -196,13 +199,17 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
         btnEquals!!.isEnabled = true
         btnLess!!.isEnabled = true
 
-        do {
+        try {
+            do {
 //        invoke getRandomExpression method and assign returning pair to variable
-            expOnePair = getRandomExpression()
-        } while (expOnePair!!.second < 0 || expOnePair!!.second > 100) // loop if expression value less than 0 or greater than 100
-        do {
-            expTwoPair = getRandomExpression()
-        } while (expTwoPair!!.second < 0 || expTwoPair!!.second > 100)
+                expOnePair = getRandomExpression()
+            } while (expOnePair!!.second < 0 || expOnePair!!.second > 100) // loop if expression value less than 0 or greater than 100
+            do {
+                expTwoPair = getRandomExpression()
+            } while (expTwoPair!!.second < 0 || expTwoPair!!.second > 100)
+        } catch (e: InterruptedException) {
+            Thread.currentThread().interrupt()
+        }
 //        invoke setExpressionToWidgets method
         setExpressionToWidgets(value)
 //        Logging data for debugging purpose
@@ -279,17 +286,16 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
                     }
                 }
                 "/" -> {
-                    if (expVal != 0.0) {
-                        nextTerm = generateFactors(expVal.toInt()).random()
-                    }
+//                        Invoke generateFactors function
+                    nextTerm = generateFactors(expVal.toInt()).random()
                 }
-            }
-            if (operator == "*") {
-                var temp: Double
-                do {
-                    nextTerm = (1..20).random()
-                    temp = expVal * nextTerm
-                } while (temp >= 100) // generate random number until value is less than 100
+                "*" -> {
+                    var temp: Double
+                    do {
+                        nextTerm = (1..20).random()
+                        temp = expVal * nextTerm
+                    } while (temp >= 100) // generate random number until value is less than 100
+                }
             }
 
 //            add next number to expression list
@@ -311,25 +317,21 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
      * This Method [generateFactors] generates factors for given number
      *
      * @param number - expression value
-     * @return [ArrayList] - array list contains factors
+     * @return [List] - array list contains factors
      */
-    private fun generateFactors(number: Int): ArrayList<Int> {
-        val factors = ArrayList<Int>()
-        for (i in 1..number) {
-            if (number > 20) {
-                if (number % i == 0 && i <= 20) {
-                    factors.add(i)
-                } else {
-                    break
-                }
-            } else {
-                if (number % i == 0 && i <= number) {
-                    factors.add(i)
-                } else {
-                    break
-                }
+    private fun generateFactors(number: Int): List<Int> {
+        val factors = mutableListOf<Int>()
+        for (i in 1..number + 1) {
+            if (number % i == 0 && i <= 20) {
+                factors.add(i)
             }
         }
+        if (factors.isEmpty()) {
+            factors.add(1)
+        }
+        factors.shuffle()
+        Log.d("EXP factorList", "$factors")
+
         return factors
     }
 
@@ -486,6 +488,7 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
     private fun reduceOneSecond() {
         if (gameTime > 0) {
             if (tempCorrectCount == 5) {
+                timerView!!.clearAnimation()
                 gameTime += 10
                 totalTimeElapsed += 10
                 tempCorrectCount = 0
