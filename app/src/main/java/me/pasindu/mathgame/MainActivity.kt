@@ -10,6 +10,8 @@ import android.transition.Slide
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.PopupWindow
 
@@ -24,12 +26,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     //    PopupWindow Declaration
     private var popupWindow: PopupWindow? = null
 
+    //    Move and Rotate Animation
+    private var rotateAndMove: Animation? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+//        hide action Bar
+        this.supportActionBar!!.hide()
+
         btnNewGame = findViewById(R.id.newGame_btn)
         btnAbout = findViewById(R.id.aboutBtn)
+        rotateAndMove = AnimationUtils.loadAnimation(this,R.anim.rotateandmove)
+
+        btnNewGame!!.startAnimation(rotateAndMove)
+        btnAbout!!.startAnimation(rotateAndMove)
 
 //        Set Click Listener for New Game Button
         btnNewGame!!.setOnClickListener(this)

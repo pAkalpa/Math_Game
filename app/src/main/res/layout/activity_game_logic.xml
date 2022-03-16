@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:text="@string/ex1"
             android:fontFamily="@font/fredoka_regular"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:layout_height="wrap_content"
             android:background="@drawable/pill_shape_textview"
             android:textColor="@color/white"
@@ -93,7 +93,7 @@
             android:background="@drawable/pill_shape_textview"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:layout_marginEnd="2dp"
             tools:targetApi="o" />
     </LinearLayout>
