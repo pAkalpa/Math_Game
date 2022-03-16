@@ -3,21 +3,19 @@ package me.pasindu.mathgame
 import android.content.Intent
 import android.graphics.Color
 import android.media.MediaPlayer
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ProgressBar
-import android.os.Handler
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import kotlin.random.Random
-import kotlin.random.nextInt
 
 class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -206,8 +204,8 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
 //        invoke setExpressionToWidgets method
         setExpressionToWidgets(value)
 //        Logging data for debugging purpose
-        Log.d("EXP1 ${expOnePair!!.first}", "$expOneVal")
-        Log.d("EXP2 ${expTwoPair!!.first}", "$expTwoVal")
+        Log.d("EXP1 ${expOnePair!!.first}", "${expOnePair!!.second}")
+        Log.d("EXP2 ${expTwoPair!!.first}", "${expTwoPair!!.second}")
     }
 
     /**
@@ -270,16 +268,16 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
             expression.add(operator)
 //            Generate next number
             var nextTerm = (1..20).random()
-            if (operator == "/" && i == 1) {
-                nextTerm = (1..firstTerm).random()
-            } else if (operator == "/" && i >= 2 && expVal.toInt() > 0) {
-                nextTerm = (1..expVal.toInt()).random()
-            }
-            if (i > 2) {
-                nextTerm = if (expVal % 2 == 0.toDouble()) {
-                    Random.nextInt(1..20 / 2) * 2
-                } else {
-                    Random.nextInt(1..20 / 2) * 2 + 1
+            when (operator) {
+                "-" -> {
+                    if (nextTerm > firstTerm && i == 1) {
+                        nextTerm = (1..firstTerm).random()
+                    }
+                }
+                "/" -> {
+                    if (expVal != 0.0) {
+                        nextTerm = generateFactors(expVal.toInt()).random()
+                    }
                 }
             }
             if (operator == "*") {
@@ -303,6 +301,32 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
         }
 //        return pair of expression and its value
         return Pair(expression.joinToString(separator = " "), expVal)
+    }
+
+    /**
+     * This Method [generateFactors] generates factors for given number
+     *
+     * @param number
+     * @return [ArrayList]
+     */
+    private fun generateFactors(number: Int): ArrayList<Int> {
+        val factors = ArrayList<Int>()
+        for (i in 1..number) {
+            if (number > 20) {
+                if (number % i == 0 && i <= 20) {
+                    factors.add(i)
+                } else {
+                    break
+                }
+            } else {
+                if (number % i == 0 && i <= number) {
+                    factors.add(i)
+                } else {
+                    break
+                }
+            }
+        }
+        return factors
     }
 
     /**
