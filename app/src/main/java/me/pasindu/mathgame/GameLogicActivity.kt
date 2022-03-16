@@ -187,6 +187,8 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
 
     /**
      * This Method [setExpression] Generate Random Math expressions
+     *
+     * @param value - check activity start
      */
     private fun setExpression(value: Boolean) {
 //        enable all disabled buttons
@@ -210,6 +212,8 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
 
     /**
      * This Method [setExpressionToWidgets] set expressions to [TextView]'s'
+     *
+     * @param value - check activity start
      */
     private fun setExpressionToWidgets(value: Boolean) {
         if (!value) {
@@ -306,8 +310,8 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
     /**
      * This Method [generateFactors] generates factors for given number
      *
-     * @param number
-     * @return [ArrayList]
+     * @param number - expression value
+     * @return [ArrayList] - array list contains factors
      */
     private fun generateFactors(number: Int): ArrayList<Int> {
         val factors = ArrayList<Int>()
@@ -332,7 +336,7 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
     /**
      * This [getCorrectAnswer] Method Check for Correct Answer
      *
-     * @param [operator]
+     * @param [operator] - Button Operator(GREATER, EQUAL, LESS)
      */
     private fun getCorrectAnswer(operator: String) {
 //        increment question count by one
@@ -391,7 +395,7 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
     /**
      * This Method [onMuteClick] Mute tick sound
      *
-     * @param [btnState]
+     * @param [btnState] - Mute button state(Mute or not)
      */
     private fun onMuteClick(btnState: Boolean) {
         state = when (btnState) {
@@ -416,7 +420,7 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
     /**
      * This Overridden Method [onClick] set click listeners for [Button]'s
      *
-     * @param [view]
+     * @param [view] - Activity View
      */
     override fun onClick(view: View?) {
         when (view!!.id) {
@@ -441,7 +445,7 @@ class GameLogicActivity : AppCompatActivity(), View.OnClickListener {
     /**
      * This Overridden Method [onSaveInstanceState] save data on activity state change
      *
-     * @param [outState]
+     * @param [outState] - saved data in Instance
      */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
