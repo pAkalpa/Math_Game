@@ -27,7 +27,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var popupWindow: PopupWindow? = null
 
     //    Move and Rotate Animation
-    private var rotateAndMove: Animation? = null
+    private var ngRotateAndMove: Animation? = null
+
+    //    Move and Rotate Animation
+    private var atRotateAndMove: Animation? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,10 +41,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         btnNewGame = findViewById(R.id.newGame_btn)
         btnAbout = findViewById(R.id.aboutBtn)
-        rotateAndMove = AnimationUtils.loadAnimation(this,R.anim.rotateandmove)
+        ngRotateAndMove = AnimationUtils.loadAnimation(this,R.anim.ngrotateandmove)
+        atRotateAndMove = AnimationUtils.loadAnimation(this, R.anim.atrotateandmove)
 
-        btnNewGame!!.startAnimation(rotateAndMove)
-        btnAbout!!.startAnimation(rotateAndMove)
+        btnNewGame!!.startAnimation(ngRotateAndMove)
+        btnAbout!!.startAnimation(atRotateAndMove)
 
 //        Set Click Listener for New Game Button
         btnNewGame!!.setOnClickListener(this)
